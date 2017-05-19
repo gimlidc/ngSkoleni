@@ -1,0 +1,25 @@
+{
+  "name": "angular",
+  "description": "Projekt pro účely školení AngularJS 1.x",
+  "main": "index.js",
+  "authors": [
+    "Honza Blažek"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "AngularJS"
+  ],
+  "homepage": "http://localhost:8000",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-cookies": "^1.6.4",
+    "angular-route": "^1.6.4"
+  }
+}
