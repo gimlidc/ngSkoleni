@@ -1,18 +1,33 @@
 (function(){
 
+    // ... strict mode is described in index.js
     'use strict';
 
     // This directive should increment visit counter in cookies of the visitor and display these information
     angular.module('angular').directive('visitCounter', Directive);
 
+    /**
+     * Directive with a template corresponds to a small part of a page, which is reusable accross application
+     * @returns {{templateUrl: string, controllerAs: string, controller: [string,*]}}
+     * @constructor
+     */
     function Directive() {
         return {
-            templateUrl: './components/visitCounter/visitCounter.html',
-            controllerAs: 'ctrl',
-            controller: ["$cookies", Ctrl]
+            scope: true,
+            templateUrl: './components/visitCounter/visitCounter.html', // corresponding template - part of the DOM
+            controllerAs: 'ctrl', // naming convention for accessing controller variables and functions in template
+            controller: ["visitCounterService", Ctrl] // injection of dependencies and definition of a controller
         };
 
-        function Ctrl($cookies) {
+        /**
+         * Definition of a controller is encapsulated into a function. Everything assigned into "ctrl" and "this" object
+         * will be visible in the template.
+         *
+         * @param visitCounterService - singleton for handling visit counter
+         * @constructor
+         */
+        function Ctrl(visitCounterService) {
+            // this assignment makes controller visible in the template
             var ctrl = this;
 
             /*
@@ -25,14 +40,8 @@
              * see: https://docs.angularjs.org/api/ng/service/$compile
              */
             ctrl.$onInit = function init() {
-                ctrl.userVisits = $cookies.get("visitCounter");
-
-                if (!ctrl.userVisits) {
-                    ctrl.userVisits = 0;
-                }
-                ctrl.userVisits++;
-
-                $cookies.put("visitCounter", ctrl.userVisits);
+                // we read visit counts
+                ctrl.userVisits = visitCounterService.getVisitCount();
             }
         }
     }
