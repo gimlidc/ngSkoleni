@@ -16,10 +16,13 @@
         function init() {
             ctrl.vokativ = "dear user";
             // we try to read vokativ from cookies
-            ctrl.vokativ = $cookies.get("vokativ");
+            if ($cookies.get("vokativ")) {
+                ctrl.vokativ = $cookies.get("vokativ");
+            }
         }
 
         // There is not used $onInit patter because there is a bug in angular-router
         init();
+        console.log(ctrl.vokativ);
     }
 })();

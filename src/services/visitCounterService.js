@@ -6,7 +6,9 @@
     function Service($cookies) {
 
         var visitCount = 0;
-        visitCount = $cookies.get("visitCounter");
+        if($cookies.get("visitCounter")) {
+            visitCount = $cookies.get("visitCounter");
+        }
         visitCount++;
         $cookies.put("visitCounter", visitCount);
 
