@@ -14,7 +14,7 @@
     function Directive() {
         return {
             scope: true,
-            templateUrl: './components/visitCounter/visitCounter.html', // corresponding template - part of the DOM
+            templateUrl: 'components/visitCounter/visitCounter.html', // corresponding template - part of the DOM
             controllerAs: 'ctrl', // naming convention for accessing controller variables and functions in template
             controller: ["visitCounterService", Ctrl] // injection of dependencies and definition of a controller
         };

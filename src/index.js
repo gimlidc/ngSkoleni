@@ -15,12 +15,15 @@
      */
     'use strict';
 
+    var templates = angular.module("templates", []);
+
     // Creation of an angular module - in our case module containing whole application
     var appModule = angular.module('angular', [
         // in this array are listed all modules, which this module depends on
 
         'ngRoute', // ref: https://docs.angularjs.org/api/ngRoute
-        'ngCookies' // ref: https://docs.angularjs.org/api/ngCookies
+        'ngCookies', // ref: https://docs.angularjs.org/api/ngCookies
+        "templates" // ref:
     ]);
 
     appModule.config(Config);
@@ -30,12 +33,12 @@
     function Config($routeProvider) {
         $routeProvider
             .when('/user/new', {
-                templateUrl: '/pages/newUserForm/newUserForm.html',
+                templateUrl: 'pages/newUserForm/newUserForm.html',
                 controller: 'newUserFormCtrl',
                 controllerAs: 'ctrl'
             })
             .otherwise({
-                templateUrl: '/pages/landingPage/landingPage.html',
+                templateUrl: 'pages/landingPage/landingPage.html',
                 controller: 'landingPageCtrl',
                 controllerAs: 'ctrl'
             });
