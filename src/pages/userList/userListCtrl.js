@@ -14,13 +14,20 @@
         ctrl.users = [{
             name: "Pepa",
             surname: "Novák",
-            birthYear: 1920
+            birthYear: 1920,
+            visible: true
         },
         {
             name: "Franta",
             surname: "Liška",
-            birthYear: 2010
+            birthYear: 2010,
+            visible: true
         }];
+
+        ctrl.userZmiz = function(user) {
+            var index = ctrl.users.indexOf(user);
+            ctrl.users.splice(index,1);
+        };
 
     }
 

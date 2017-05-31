@@ -1,8 +1,12 @@
 <h1>List of known users</h1>
 <table border="1" cellpadding="5">
-    <tr ng-repeat="user in ctrl.users">
+    <tr ng-repeat="user in ctrl.users" ng-show="user.visible">
         <td>{{user.name}}</td>
         <td>{{user.surname}}</td>
         <td>{{user.birthYear}}</td>
+        <td><button ng-click="ctrl.userZmiz(user)">zmiz</button></td>
     </tr>
 </table>
+<pre>
+    {{ctrl.users | json }}
+</pre>
