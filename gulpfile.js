@@ -62,7 +62,7 @@ gulp.task('templates', ['clean'], function () {
         .pipe(debug({title: 'minifyHtml'}))
         .pipe(htmlMinify({collapseWhitespace: true}))
         .pipe(debug({title: 'template'}))
-        .pipe(templateCache("templates", {standalone: true}))
+        .pipe(templateCache())
         .pipe(gulp.dest(paths.build));
 });
 
