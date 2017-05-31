@@ -1,0 +1,9 @@
+{
+	"urls": {
+		"be": "http://localhost:3000"
+	},
+	"endpoints": {
+		"users": "/users",
+		"newUser": "/users/new"
+	}
+}

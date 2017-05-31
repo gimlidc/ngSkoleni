@@ -1,0 +1,9 @@
+{
+	"urls": {
+		"be": "http://produkci.adresa.be"
+	},
+	"endpoints": {
+		"users": "/users",
+		"newUser": "/users/new"
+	}
+}
