@@ -15,20 +15,21 @@
             name: "Pepa",
             surname: "Novák",
             birthYear: 1920,
-            visible: true
+            visible: true,
+            editable: false
         },
         {
             name: "Franta",
             surname: "Liška",
             birthYear: 2010,
-            visible: true
+            visible: true,
+            editable: false
         }];
 
         ctrl.userZmiz = function(user) {
             var index = ctrl.users.indexOf(user);
             ctrl.users.splice(index,1);
         };
-
     }
 
 })();

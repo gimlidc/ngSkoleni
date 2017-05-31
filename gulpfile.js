@@ -35,7 +35,7 @@ gulp.task('inject', function () {
         .pipe(gulp.dest('./src'));
 });
 
-gulp.task('webserver', ['inject'], function() {
+gulp.task('webserver', ['inject', 'vendor'], function() {
     return gulp.src([paths.src, paths.build])
         .pipe(webserver({
             livereload: {

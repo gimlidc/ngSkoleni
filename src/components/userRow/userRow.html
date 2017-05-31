@@ -1,0 +1,19 @@
+<td ng-show="!ctrl.data.editable">{{ctrl.data.name}}</td>
+<td ng-show="ctrl.data.editable">
+    <input ng-model="ctrl.data.name" />
+</td>
+
+<td ng-show="!ctrl.data.editable">{{ctrl.data.surname}}</td>
+<td ng-show="ctrl.data.editable">
+    <input ng-model="ctrl.data.surname" />
+</td>
+
+<td ng-show="!ctrl.data.editable">{{ctrl.data.birthYear}}</td>
+<td ng-show="ctrl.data.editable">
+    <input ng-model="ctrl.data.birthYear" />
+</td>
+
+<td>
+    <button ng-click="ctrl.data.editable = !ctrl.data.editable">edit</button>
+    <button ng-click="ctrl.userZmiz(ctrl.data)">zmiz</button>
+</td>
