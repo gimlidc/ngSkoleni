@@ -23,7 +23,7 @@
 
         'ngRoute', // ref: https://docs.angularjs.org/api/ngRoute
         'ngCookies', // ref: https://docs.angularjs.org/api/ngCookies
-        "templates" // ref:
+        "templates"
     ]);
 
     appModule.config(Config);
@@ -31,21 +31,34 @@
     Config.$inject = ["$routeProvider"];
 
     function Config($routeProvider) {
+        function configuration($http, $rootScope) {
+            $http.get('config.json').then(function(res) {
+                $rootScope.config = res.data;
+            });
+        }
+
+        var commonResolve = {
+            configuration: ["$http", "$rootScope", configuration]
+        };
+
         $routeProvider
             .when('/user/new', {
                 templateUrl: 'pages/newUserForm/newUserForm.html',
                 controller: 'newUserFormCtrl',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                resolve: commonResolve
             })
             .when('/users', {
                 templateUrl: 'pages/userList/userList.html',
                 controller: 'userListCtrl',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                resolve: commonResolve
             })
             .otherwise({
                 templateUrl: 'pages/landingPage/landingPage.html',
                 controller: 'landingPageCtrl',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                resolve: commonResolve
             });
     }
 

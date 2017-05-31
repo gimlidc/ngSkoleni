@@ -9,13 +9,15 @@ var templateCache = require('gulp-angular-templatecache');
 var htmlMinify = require('gulp-htmlmin');
 var filesort = require('gulp-angular-filesort');
 var ngAnnotate = require('gulp-ng-annotate');
+var rename = require('gulp-rename');
 
 // paths definition for sources, build and tests
 var paths = {
     "src": "./src/",
     "build": "./build/",
     "dist": "./target/",
-    "bower": "./bower_components/"
+    "bower": "./bower_components/",
+    "config": "./config/"
 };
 
 var deps = [
@@ -35,7 +37,7 @@ gulp.task('inject', function () {
         .pipe(gulp.dest('./src'));
 });
 
-gulp.task('webserver', ['inject', 'vendor'], function() {
+gulp.task('webserver', ['inject', 'vendor', 'config-devel'], function() {
     return gulp.src([paths.src, paths.build])
         .pipe(webserver({
             livereload: {
@@ -85,11 +87,23 @@ gulp.task('build', ['clean'], function() {
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('deploy', ['templates', 'vendor', 'build'], function() {
+gulp.task('config-devel', ['clean'], function() {
+    gulp.src([paths.config + "devel.json"])
+        .pipe(rename("config.json"))
+        .pipe(gulp.dest(paths.build));
+});
+
+gulp.task('config-prod', ['clean'], function() {
+    gulp.src([paths.config + "production.json"])
+        .pipe(rename("config.json"))
+        .pipe(gulp.dest(paths.build));
+});
+
+gulp.task('deploy', ['templates', 'vendor', 'build', 'config-prod'], function() {
     gulp.src([
         paths.build + "vendor.js",
         paths.build + "app.js",
-        paths.build + "templates.js"
+        paths.build + "templates.js",
     ])
         .pipe(debug({title: "joining builded files"}))
         .pipe(concat("app.js"))
@@ -98,6 +112,9 @@ gulp.task('deploy', ['templates', 'vendor', 'build'], function() {
         .pipe(uglify())
         .pipe(debug({title: "deploy"}))
         .pipe(gulp.dest(paths.dist));
+
+    gulp.src([paths.build + "config.json"]).pipe(gulp.dest(paths.dist));
+
     return gulp.src("index.html").pipe(gulp.dest(paths.dist));
 });
 
