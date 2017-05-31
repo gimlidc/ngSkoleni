@@ -10,7 +10,7 @@
     function Directive() {
 
         return {
-            "templateUrl": './components/userRow/userRow.html',
+            "templateUrl": 'components/userRow/userRow.html',
             "scope": {
                 "data": "=",
                 "userZmiz": "="
