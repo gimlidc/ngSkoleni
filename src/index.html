@@ -2,13 +2,16 @@
 <html lang="en" ng-app="angular">
 <head>
 
+    <script src="vendor.js"></script>
+
     <!-- Following section mark position where gulp-inject put all files necessary for running (automagically) -->
-    <!-- inject:js -->
+       <!-- inject:js -->
     <script src="index.js"></script>
     <script src="services/visitCounterService.js"></script>
-    <script src="components/visitCounter/visitCounter.js"></script>
     <script src="pages/landingPage/landingPage.js"></script>
     <script src="pages/newUserForm/newUserForm.js"></script>
+    <script src="pages/userList/userListCtrl.js"></script>
+    <script src="components/visitCounter/visitCounter.js"></script>
     <!-- endinject -->
 
     <meta charset="UTF-8">

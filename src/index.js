@@ -37,6 +37,11 @@
                 controller: 'newUserFormCtrl',
                 controllerAs: 'ctrl'
             })
+            .when('/users', {
+                templateUrl: 'pages/userList/userList.html',
+                controller: 'userListCtrl',
+                controllerAs: 'ctrl'
+            })
             .otherwise({
                 templateUrl: 'pages/landingPage/landingPage.html',
                 controller: 'landingPageCtrl',
