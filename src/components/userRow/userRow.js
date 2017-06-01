@@ -16,12 +16,12 @@
                 "userZmiz": "=",
                 "expand": "="
             },
-            "controller": ["$http", "$rootScope", Ctrl],
+            "controller": ["$http", "$rootScope", "$q", Ctrl],
             "controllerAs": "ctrl",
             "bindToController": true
         };
 
-        function Ctrl($http, $rootScope) {
+        function Ctrl($http, $rootScope, $q) {
             var ctrl = this;
             ctrl.expanded = false;
 
@@ -45,14 +45,16 @@
                     }).then(function success(data) {
                         ctrl.detail = data.data;
                         if (data.data.type && data.data.type === "admin") {
-                            $http({
+                            return $http({
                                 "method": "GET",
                                 "url": $rootScope.config.urls.be + $rootScope.config.endpoints.adminRoles.replace(":id", ctrl.data.id)
-                            }).then(function success(rolesResponse) {
-                                ctrl.roles = rolesResponse.data
                             });
+                        } else {
+                            return $q.resolve({"data": {"roles": []}});
                         }
-                    })
+                    }).then(function success(rolesResponse) {
+                        ctrl.roles = rolesResponse.data
+                    });
                 }
 
             }
