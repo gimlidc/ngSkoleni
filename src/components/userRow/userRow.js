@@ -44,6 +44,14 @@
                         "url": $rootScope.config.urls.be + $rootScope.config.endpoints.userDetails.replace(":id", ctrl.data.id)
                     }).then(function success(data) {
                         ctrl.detail = data.data;
+                        if (data.data.type && data.data.type === "admin") {
+                            $http({
+                                "method": "GET",
+                                "url": $rootScope.config.urls.be + $rootScope.config.endpoints.adminRoles.replace(":id", ctrl.data.id)
+                            }).then(function success(rolesResponse) {
+                                ctrl.roles = rolesResponse.data
+                            });
+                        }
                     })
                 }
 
