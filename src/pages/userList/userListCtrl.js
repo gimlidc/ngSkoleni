@@ -7,24 +7,19 @@
 
     angular.module("angular").controller("userListCtrl", Ctrl);
 
-    function Ctrl() {
+    Ctrl.$inject = ["$http", "$rootScope"];
+
+    function Ctrl($http, $rootScope) {
 
         var ctrl = this;
 
-        ctrl.users = [{
-            name: "Pepa",
-            surname: "Novák",
-            birthYear: 1920,
-            visible: true,
-            editable: false
-        },
-        {
-            name: "Franta",
-            surname: "Liška",
-            birthYear: 2010,
-            visible: true,
-            editable: false
-        }];
+        console.log($rootScope.config);
+        $http({
+            method: "GET",
+            url: $rootScope.config.urls.be + $rootScope.config.endpoints.users
+        }).then(function success(data) {
+            ctrl.users = data.data;
+        });
 
         ctrl.userZmiz = function(user) {
             var index = ctrl.users.indexOf(user);

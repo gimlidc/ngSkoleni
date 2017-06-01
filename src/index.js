@@ -32,7 +32,7 @@
 
     function Config($routeProvider) {
         function configuration($http, $rootScope) {
-            $http.get('config.json').then(function(res) {
+            return $http.get('config.json').then(function(res) {
                 $rootScope.config = res.data;
             });
         }
