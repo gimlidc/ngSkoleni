@@ -13,7 +13,6 @@
 
         var ctrl = this;
 
-        console.log($rootScope.config);
         $http({
             method: "GET",
             url: $rootScope.config.urls.be + $rootScope.config.endpoints.users

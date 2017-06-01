@@ -13,18 +13,40 @@
             "templateUrl": 'components/userRow/userRow.html',
             "scope": {
                 "data": "=",
-                "userZmiz": "="
+                "userZmiz": "=",
+                "expand": "="
             },
-            "controller": Ctrl,
+            "controller": ["$http", "$rootScope", Ctrl],
             "controllerAs": "ctrl",
             "bindToController": true
         };
 
-        function Ctrl() {
+        function Ctrl($http, $rootScope) {
             var ctrl = this;
+            ctrl.expanded = false;
 
             ctrl.$onInit = function() {
-                console.log(ctrl.data);
+                ctrl.toggleExpand(!!ctrl.expand);
+            };
+
+            ctrl.toggleExpand = function(newValue) {
+                // switch to new value or make negative
+                if (newValue === undefined) {
+                    ctrl.expanded = !ctrl.expanded;
+                } else {
+                    ctrl.expanded = newValue;
+                }
+
+                //evaluate new state
+                if (ctrl.expanded && !ctrl.detail) {
+                    ctrl.detail = $http({
+                        "method": "GET",
+                        "url": $rootScope.config.urls.be + $rootScope.config.endpoints.userDetails.replace(":id", ctrl.data.id)
+                    }).then(function success(data) {
+                        ctrl.detail = data.data;
+                    })
+                }
+
             }
         }
     }

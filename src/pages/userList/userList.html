@@ -1,5 +1,4 @@
 <h1>List of known users</h1>
-<table border="1" cellpadding="5">
-    <tr data-ng-repeat="user in ctrl.users" user-row data="user" user-zmiz="ctrl.userZmiz">
-    </tr>
-</table>
+<div>
+    <user-row data-ng-repeat="user in ctrl.users" data="user" user-zmiz="ctrl.userZmiz" expand="ctrl.users.length <= 10">
+</div>

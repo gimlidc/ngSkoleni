@@ -1,19 +1,21 @@
-<td ng-show="!ctrl.data.editable">{{ctrl.data.name}}</td>
-<td ng-show="ctrl.data.editable">
-    <input ng-model="ctrl.data.name" />
-</td>
+<label>Name: </label>
+<span ng-show="!ctrl.data.editable">{{ctrl.data.name}}</span>
+<input ng-show="ctrl.data.editable" ng-model="ctrl.data.name" />
 
-<td ng-show="!ctrl.data.editable">{{ctrl.data.surname}}</td>
-<td ng-show="ctrl.data.editable">
-    <input ng-model="ctrl.data.surname" />
-</td>
+<label>Surname: </label>
+<span ng-show="!ctrl.data.editable">{{ctrl.data.surname}}</span>
+<input ng-show="ctrl.data.editable"  ng-model="ctrl.data.surname" />
 
-<td ng-show="!ctrl.data.editable">{{ctrl.data.birthYear}}</td>
-<td ng-show="ctrl.data.editable">
-    <input ng-model="ctrl.data.birthYear" />
-</td>
+<label>Birth year: </label>
+<span ng-show="!ctrl.data.editable">{{ctrl.data.birthYear}}</span>
+<input ng-show="ctrl.data.editable" ng-model="ctrl.data.birthYear" />
 
-<td>
-    <button ng-click="ctrl.data.editable = !ctrl.data.editable">edit</button>
+
+<div>
+    <label>Action: </label>
+    <button ng-click="ctrl.data.editable = !ctrl.data.editable">{{ ctrl.data.editable ? "store" : "edit" }}</button>
     <button ng-click="ctrl.userZmiz(ctrl.data)">zmiz</button>
-</td>
+    <button ng-click="ctrl.toggleExpand()">{{ ctrl.expanded ? "zabal" : "rozbal"}}</button>
+</div>
+
+<pre ng-if="ctrl.expanded">{{ctrl.detail | json}}</pre>
