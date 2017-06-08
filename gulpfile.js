@@ -106,7 +106,7 @@ gulp.task('deploy', ['templates', 'vendor', 'build', 'config-prod'], function() 
     gulp.src([
         paths.build + "vendor.js",
         paths.build + "app.js",
-        paths.build + "templates.js",
+        paths.build + "templates.js"
     ])
         .pipe(debug({title: "joining builded files"}))
         .pipe(concat("app.js"))
@@ -117,6 +117,7 @@ gulp.task('deploy', ['templates', 'vendor', 'build', 'config-prod'], function() 
         .pipe(gulp.dest(paths.dist));
 
     gulp.src([paths.build + "config.json"]).pipe(gulp.dest(paths.dist));
+    gulp.src([paths.lang + "/*.json"]).pipe(gulp.dest(paths.dist));
 
     return gulp.src("index.html").pipe(gulp.dest(paths.dist));
 });
