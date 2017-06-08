@@ -44,7 +44,7 @@
                         "url": $rootScope.config.urls.be + $rootScope.config.endpoints.userDetails.replace(":id", ctrl.data.id)
                     }).then(function success(data) {
                         ctrl.detail = data.data;
-                        if (data.data.type && data.data.type === "admin") {
+                        if (data.data && data.data.type === "admin") {
                             return $http({
                                 "method": "GET",
                                 "url": $rootScope.config.urls.be + $rootScope.config.endpoints.adminRoles.replace(":id", ctrl.data.id)

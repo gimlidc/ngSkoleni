@@ -23,14 +23,15 @@
 
         'ngRoute', // ref: https://docs.angularjs.org/api/ngRoute
         'ngCookies', // ref: https://docs.angularjs.org/api/ngCookies
-        "templates"
+        "templates",
+        'pascalprecht.translate' // ref: https://angular-translate.github.io/docs/#/guide/02_getting-started
     ]);
 
     appModule.config(Config);
 
-    Config.$inject = ["$routeProvider"];
+    Config.$inject = ["$routeProvider", "$translateProvider"];
 
-    function Config($routeProvider) {
+    function Config($routeProvider, $translateProvider) {
         function configuration($http, $rootScope) {
             return $http.get('config.json').then(function(res) {
                 $rootScope.config = res.data;
@@ -60,6 +61,14 @@
                 controllerAs: 'ctrl',
                 resolve: commonResolve
             });
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/',
+            suffix: '.json'
+        });
+
+        $translateProvider.useSanitizeValueStrategy(null);
+        $translateProvider.preferredLanguage("cs");
     }
 
 })();

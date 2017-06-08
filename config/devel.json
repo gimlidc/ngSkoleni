@@ -4,6 +4,8 @@
 	},
 	"endpoints": {
 		"users": "/users",
-		"newUser": "/users/new"
+		"newUser": "/users/new",
+		"userDetails": "/users/:id/details",
+		"adminRoles": "/users/:id/adminRoles"
 	}
 }

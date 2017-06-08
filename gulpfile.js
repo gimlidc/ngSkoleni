@@ -14,6 +14,7 @@ var rename = require('gulp-rename');
 // paths definition for sources, build and tests
 var paths = {
     "src": "./src/",
+    "lang": "./language/",
     "build": "./build/",
     "dist": "./target/",
     "bower": "./bower_components/",
@@ -23,7 +24,9 @@ var paths = {
 var deps = [
     "angular/angular.js",
     "angular-cookies/angular-cookies.js",
-    "angular-route/angular-route.js"
+    "angular-route/angular-route.js",
+    "angular-translate/angular-translate.js",
+    "angular-translate-loader-static-files/angular-translate-loader-static-files.js"
 ];
 
 gulp.task('inject', function () {
@@ -38,7 +41,7 @@ gulp.task('inject', function () {
 });
 
 gulp.task('webserver', ['inject', 'vendor', 'config-devel'], function() {
-    return gulp.src([paths.src, paths.build])
+    return gulp.src([paths.src, paths.build, paths.lang])
         .pipe(webserver({
             livereload: {
                 enable: true
