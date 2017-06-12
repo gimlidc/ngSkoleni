@@ -1,29 +1,44 @@
 <h1>Sign up</h1>
 Here you can create a new user account:
-<form>
+<form name="newUserForm" novalidate>
     <div>
         <label>Vokativ:</label>
         <input type="text"
+               name="vokativ"
                placeholder="How does your mom call you?"
                ng-model="ctrl.user.vokativ"
                ng-blur="ctrl.setVokativIntoCookies()"
-               size="30" />
+               size="30"
+               required
+        />
+        {{newUserForm['vokativ'].$error}}
+
+
     </div>
     <div>
         <label>E-mail:</label>
         <input type="email"
                placeholder="Please fill valid email address."
                ng-model="ctrl.user.email"
-               size="30" />
+               size="30"
+               name="email"
+               required
+        />
+        {{newUserForm['email'].$error}}
     </div>
     <div>
         <label>Password:</label>
         <input type="password"
                placeholder="Choose your password"
                ng-model="ctrl.user.password"
-               size="20" />
+               size="20"
+               required
+        />
+        {{newUserForm['password'].$error}}
     </div>
     <div>
         <input type="submit" value="Create!" ng-click="ctrl.validateAndSet()" />
     </div>
 </form>
+
+<pre>{{ctrl.response | json}}</pre>

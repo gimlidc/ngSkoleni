@@ -6,7 +6,7 @@
     angular.module('angular').controller('newUserFormCtrl', Ctrl);
 
     // injection: i.e. assignment of values to function call.
-    Ctrl.$inject = ["$scope", "$cookies"];
+    Ctrl.$inject = ["$scope", "$cookies", "$http", "$rootScope"];
 
     /**
      * Controller for newUserForm
@@ -14,7 +14,7 @@
      * @param $cookies is used for storing of user data
      * @constructor
      */
-    function Ctrl($scope, $cookies) {
+    function Ctrl($scope, $cookies, $http, $rootScope) {
 
         var ctrl = this;
 
@@ -44,7 +44,22 @@
         };
 
         ctrl.validateAndSet = function validateAndSet() {
+            var req = {
+                method: 'PUT',
+                url: $rootScope.config.urls.be + $rootScope.config.endpoints.newUser,
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                data: ctrl.user
+            };
 
+            $http(
+                req
+            ).then(function success(res) {
+                ctrl.response = res;
+            }, function fail(res) {
+                ctrl.response = res;
+            });
 
 
         }

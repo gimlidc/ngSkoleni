@@ -25,6 +25,7 @@ var deps = [
     "angular/angular.js",
     "angular-cookies/angular-cookies.js",
     "angular-route/angular-route.js",
+    "angular-messages/angular-messages.js",
     "angular-translate/angular-translate.js",
     "angular-translate-loader-static-files/angular-translate-loader-static-files.js"
 ];
